@@ -1,5 +1,5 @@
 //Tabs
-function abrePag(Nid, elemento, cor) {
+function abrePag(Nid, elemento) {
 	var i, content, tab;
 	content = document.getElementsByClassName("tabcontent");
 	for(i = 0; i < content.length; i++){
@@ -9,11 +9,13 @@ function abrePag(Nid, elemento, cor) {
 	tab = document.getElementsByClassName('tab');
 	for(i = 0; i < tab.length; i++){
 		tab[i].style.backgroundColor = "";
+		tab[i].style.color = "white"
 	}
 
 	document.getElementById(Nid).style.display = "block";
 
-	elemento.style.backgroundColor = cor;
+	elemento.style.backgroundColor = 'white';
+	elemento.style.color = 'black';
 }
 //fim de Tabs
 
