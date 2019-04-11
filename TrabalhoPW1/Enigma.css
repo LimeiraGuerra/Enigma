@@ -9,13 +9,30 @@ header {
 	text-align: center;
 }
 
-header h1{
+header h1 {
 	font-size: 50px;
 	color: white;
 }
 
-nav button.active {
-  background-color: #ccc;
+header nav {
+	background-color: #666666;
+	width: 80%;
+	margin: auto;
+	padding: 0 10px;
+	border-radius: 10px 10px 0 0;
+}
+
+header nav button {
+	background-color: #666666;
+	border-style: none;
+	width: 100px;
+	padding: 10px;
+	color: white;
+	font-size: 15px;
+}
+
+header nav button:hover {
+	background-color: #262626;
 }
 
 main {

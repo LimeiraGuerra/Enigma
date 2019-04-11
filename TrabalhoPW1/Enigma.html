@@ -13,11 +13,11 @@
 		<h1>Máquina Enigma</h1>
 
 		<nav>
-			<button id="defaultOpen" class="tab" onclick="abrePag('Config', this, 'white')">Configuração</button>
-			<button class="tab" onclick="abrePag('Virtual', this, 'white')">Máquina 1</button>
-			<button class="tab" onclick="abrePag('Fisico', this, 'white')">Máquina 2</button>
-			<input id="cxDesc" type="checkbox" name="Descrip" />
-			<label for="cxDesc">Descriptografar</label>
+			<button id="defaultOpen" class="tab" onclick="abrePag('Config', this)">Configuração</button><!--
+			--><button class="tab" onclick="abrePag('Virtual', this)">Máquina 1</button><!--
+			--><button class="tab" onclick="abrePag('Fisico', this)">Máquina 2</button><!--
+			--><input id="cxDesc" type="checkbox" name="Descrip" />
+			<label for="cxDesc" style="color: white">Descriptografar</label>
 
 		</nav>
 	</header>
@@ -81,6 +81,7 @@
 						<input type="number" name="nNR1" min="0" max="26" value="0" />
 					</div>
 				</div>
+				
 			</article>
 		</section>
 		<section id="Virtual" class="tabcontent">
