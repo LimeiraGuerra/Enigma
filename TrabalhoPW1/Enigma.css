@@ -1,5 +1,4 @@
 body {
-	background-color: #7a7456;
 	background-image: url(fundo3.jpg);
 	background-size: 100%;
 	font-family: Trebuchet MS;
@@ -7,6 +6,7 @@ body {
 
 header {
 	text-align: center;
+	margin-top: 50px;
 }
 
 header h1 {
@@ -15,7 +15,7 @@ header h1 {
 }
 
 header nav {
-	background-color: #666666;
+	background-color: #726758;
 	width: 80%;
 	margin: auto;
 	padding: 0 10px;
@@ -23,9 +23,9 @@ header nav {
 }
 
 header nav button {
-	background-color: #666666;
+	background-color: transparent;
 	border-style: none;
-	width: 100px;
+	width: 150px;
 	padding: 10px;
 	color: white;
 	font-size: 15px;
@@ -42,6 +42,7 @@ main {
 	background-color: white;
 	padding: 10px;
 	border-radius: 0 0 10px 10px;
+	background-color: #f9f3d9;
 }
 
 footer {
