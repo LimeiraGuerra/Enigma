@@ -14,7 +14,7 @@ function abrePag(Nid, elemento) {
 
 	document.getElementById(Nid).style.display = "block";
 
-	elemento.style.backgroundColor = 'white';
+	elemento.style.backgroundColor = '#f9f3d9';
 	elemento.style.color = 'black';
 }
 //fim de Tabs
