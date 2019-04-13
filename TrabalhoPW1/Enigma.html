@@ -40,7 +40,7 @@
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR3" min="0" max="26" value="0" />
+						<input type="number" id="NR3" name="nNR3" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
 				<div>
@@ -59,7 +59,7 @@
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR2" min="0" max="26" value="0" />
+						<input type="number" id="NR2" name="nNR2" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
 				<div>
@@ -78,7 +78,7 @@
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR1" min="0" max="26" value="0" />
+						<input type="number" id="NR1" name="nNR1" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
 				<div>
@@ -86,7 +86,7 @@
 					<button class="EsPlugs" value="-" onclick="maqEnigma.criaPlugs(this)">-</button><button class="EsPlugs" value="+" onclick="maqEnigma.criaPlugs(this)">+</button>
 				</div>
 				<div id="plugboard"></div>
-				<button id="Salvar" onclick="maqEnigma.configuracao()">Salvar configuração</button>
+				<button id="Salvar" onclick="maqEnigma.configuracao(), maqEnigma.posicaoInicial()">Salvar configuração</button>
 				
 			</article>
 		</section>
@@ -186,9 +186,10 @@
 	</footer>
 </body>
 <script type="text/javascript">//default ao abrir
-document.getElementById('defaultOpen').click();
-document.getElementById('CI3').click();
-document.getElementById('CII2').click();
-document.getElementById('CIII1').click();</script>
+for(let i = 0; i < 2; i++){
+	document.getElementById('defaultOpen').click();
+	document.getElementById('CI3').click();
+	document.getElementById('CII2').click();
+	document.getElementById('CIII1').click();}</script>
 </html>
 

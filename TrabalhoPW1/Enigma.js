@@ -1,6 +1,6 @@
 //Objeto da maquina
 var maqEnigma = {
-	//Tabs
+	// inicio Tabs
 	abrePag(Nid, elemento) {
 		var i, content, tab;
 		content = document.getElementsByClassName("tabcontent");
@@ -20,7 +20,7 @@ var maqEnigma = {
 		elemento.style.color = 'black';
 	},//fim de Tabs
 
-	//Plugboard
+	//inicio Plugboard
 	cont: 0,
 	criaPlugs(elemento) {
 		var i, content, div;
@@ -107,19 +107,19 @@ var maqEnigma = {
 	
 	},//fim de Plugboard
 
-	rotor1: null,
-	rotor2: null,
-	rotor3: null,
+	rotor1: null,//Config do Rotor 1
+	rotor2: null,//Config do Rotor 2
+	rotor3: null,//Config do Rotor 3
 	
 	encontraCheck(R){
 		for(let i = 0; i < R.length; i++){
 			if (R[i].checked) {
-
 				return R[i];
+				//retorna qual radio ta selecionado
 			}
 		}
 	},
-
+	//inicio do bloqueio
 	blockCheck3(){
 		var check = this.encontraCheck(document.getElementsByName('nR3'));	
 		var R2 = document.getElementsByName('nR2');
@@ -196,8 +196,9 @@ var maqEnigma = {
 				document.getElementsByClassName("lR3")[i].style.color = "black";
 			}
 		}
-	},
-
+	},//fim do bloqueio
+	
+	//inicio configuração dos rotores
 	configuracao(){
 		var conf1=["L", "G", "Q", "N", "M", "W", " ", "Y", "V", "T", "E", "B", "O", "D", "U", "H", "Z", "F", "K", "P", "C", "S", "A", "J", "R", "I", "X"];
 		var conf2=[" ", "O", "V", "Z", "N", "D", "T", "K", "A", "Q", "L", "C", "J", "R", "W", "Y", "M", "P", "X", "I", "B", "G", "H", "F", "U", "E", "S"];
@@ -263,6 +264,41 @@ var maqEnigma = {
 				break;
 		}
 
+	},//fim configuracao Rotores
+
+	//bloqueia qualquer coisa que não seja numeros e também bloqueia acima de 26
+	blockNum(){
+		var tecla = event.which;
+		var valor = event.target.value;
+		
+		if (tecla != 8) {
+			console.log(event.which);
+			if((tecla < 48 || tecla > 57) && (tecla < 96 || tecla > 105)){
+				event.preventDefault();
+			}else if(valor.length == 2){
+				event.preventDefault();
+
+			}else if(Number(valor + event.key) > 26){
+				event.target.value = 26;
+				event.preventDefault();
+				}
+		}
+	},
+
+	//inicio das posições dos Rotores
+	posicao1: 0,//Posição Rotor1
+	posicao2: 0,//Posição Rotor2
+	posicao3: 0,//Posição Rotor3
+
+	posicaoInicial(){
+		var p1 = document.getElementById("NR1");
+		var p2 = document.getElementById("NR2");
+		var p3 = document.getElementById("NR3");
+
+		this.posicao1 = Number(p1.value);
+		this.posicao2 = Number(p2.value);
+		this.posicao3 = Number(p3.value);
+		console.log(this.posicao1);
 	}
 
 
