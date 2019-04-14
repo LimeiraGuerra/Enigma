@@ -13,9 +13,9 @@
 		<h1>Máquina Enigma</h1>
 
 		<nav>
-			<button id="defaultOpen" class="tab" onclick="abrePag('Config', this)">Configuração</button><!--
-			--><button class="tab" onclick="abrePag('Virtual', this)">Máquina 1</button><!--
-			--><button class="tab" onclick="abrePag('Fisico', this)">Máquina 2</button>
+			<button id="defaultOpen" class="tab" onclick="maqEnigma.abrePag('Config', this)">Configuração</button><!--
+			--><button class="tab" onclick="maqEnigma.abrePag('Virtual', this)">Máquina 1</button><!--
+			--><button class="tab" onclick="maqEnigma.abrePag('Fisico', this)">Máquina 2</button>
 			<input id="cxDesc" type="checkbox" name="Descrip" />
 			<label for="cxDesc" style="color: white">Descriptografar</label>
 
@@ -25,62 +25,68 @@
 		<section id="Config" class="tabcontent">
 			<article>
 				<div>
-					<div>
+					<div id="Rotor3">
 					<span id="lRotor3">Rotor 3</span>
-					<input id="CI3" type="radio" name="nR3" aria-labeledby="lRotor3">
-					<label for="CI3">Configuração I</label>
-					<input id="CII3" type="radio" name="nR3" aria-labeledby="lRotor3">
-					<label for="CII3">Configuração II</label>
-					<input id="CIII3" type="radio" name="nR3" aria-labeledby="lRotor3">
-					<label for="CIII3">Configuração III</label>
-					<input id="CIV3" type="radio" name="nR3" aria-labeledby="lRotor3">
-					<label for="CIV3">Configuração IV</label>
-					<input id="CV3" type="radio" name="nR3" aria-labeledby="lRotor3">
-					<label for="CV3">Configuração V</label>
+					<input id="CI3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf1" onclick="maqEnigma.blockCheck3()">
+					<label for="CI3" class="lR3">Configuração I</label>
+					<input id="CII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf2" onclick="maqEnigma.blockCheck3()">
+					<label for="CII3" class="lR3">Configuração II</label>
+					<input id="CIII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf3" onclick="maqEnigma.blockCheck3()">
+					<label for="CIII3" class="lR3">Configuração III</label>
+					<input id="CIV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf4" onclick="maqEnigma.blockCheck3()">
+					<label for="CIV3" class="lR3">Configuração IV</label>
+					<input id="CV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf5" onclick="maqEnigma.blockCheck3()">
+					<label for="CV3" class="lR3">Configuração V</label>
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR3" min="0" max="26" value="0" />
+						<input type="number" id="NR3" name="nNR3" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
 				<div>
-					<div>
+					<div id="Rotor2">
 					<span id="lRotor2">Rotor 2</span>
-					<input id="CI2" type="radio" name="nR2" aria-labeledby="lRotor2">
-					<label for="CI2">Configuração I</label>
-					<input id="CII2" type="radio" name="nR2" aria-labeledby="lRotor2">
-					<label for="CII2">Configuração II</label>
-					<input id="CIII2" type="radio" name="nR2" aria-labeledby="lRotor2">
-					<label for="CIII2">Configuração III</label>
-					<input id="CIV2" type="radio" name="nR2" aria-labeledby="lRotor2">
-					<label for="CIV2">Configuração IV</label>
-					<input id="CV2" type="radio" name="nR2" aria-labeledby="lRotor2">
-					<label for="CV2">Configuração V</label>
+					<input id="CI2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf1" onchecked="maqEnigma.blockCheck2()">
+					<label for="CI2" class="lR2">Configuração I</label>
+					<input id="CII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf2" onclick="maqEnigma.blockCheck2()">
+					<label for="CII2" class="lR2">Configuração II</label>
+					<input id="CIII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf3" onclick="maqEnigma.blockCheck2()">
+					<label for="CIII2" class="lR2">Configuração III</label>
+					<input id="CIV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf4" onclick="maqEnigma.blockCheck2()">
+					<label for="CIV2" class="lR2">Configuração IV</label>
+					<input id="CV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf5" onclick="maqEnigma.blockCheck2()">
+					<label for="CV2" class="lR2">Configuração V</label>
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR2" min="0" max="26" value="0" />
+						<input type="number" id="NR2" name="nNR2" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
 				<div>
-					<div>
+					<div id="Rotor1">
 					<span id="lRotor1">Rotor 1</span>
-					<input id="CI1" type="radio" name="nR1" aria-labeledby="lRotor1">
-					<label for="CI1">Configuração I</label>
-					<input id="CII1" type="radio" name="nR1" aria-labeledby="lRotor1">
-					<label for="CII1">Configuração II</label>
-					<input id="CIII1" type="radio" name="nR1" aria-labeledby="lRotor1">
-					<label for="CIII1">Configuração III</label>
-					<input id="CIV1" type="radio" name="nR1" aria-labeledby="lRotor1">
-					<label for="CIV1">Configuração IV</label>
-					<input id="CV1" type="radio" name="nR1" aria-labeledby="lRotor1">
-					<label for="CV1">Configuração V</label>
+					<input id="CI1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf1" onclick="maqEnigma.blockCheck1()">
+					<label for="CI1" class="lR1">Configuração I</label>
+					<input id="CII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf2" onclick="maqEnigma.blockCheck1()">
+					<label for="CII1" class="lR1">Configuração II</label>
+					<input id="CIII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf3" onclick="maqEnigma.blockCheck1()">
+					<label for="CIII1" class="lR1">Configuração III</label>
+					<input id="CIV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf4" onclick="maqEnigma.blockCheck1()">
+					<label for="CIV1" class="lR1">Configuração IV</label>
+					<input id="CV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf5" onclick="maqEnigma.blockCheck1()">
+					<label for="CV1" class="lR1">Configuração V</label>
 					</div>
 					<div>
 						<label for="">Posição:</label>
-						<input type="number" name="nNR1" min="0" max="26" value="0" />
+						<input type="number" id="NR1" name="nNR1" min="0" max="26" value="0" onkeydown="maqEnigma.blockNum()" />
 					</div>
 				</div>
+				<div>
+					<h2>Plugboard</h2>
+					<button class="EsPlugs" value="-" onclick="maqEnigma.criaPlugs(this)">-</button><button class="EsPlugs" value="+" onclick="maqEnigma.criaPlugs(this)">+</button>
+				</div>
+				<div id="plugboard"></div>
+				<button id="Salvar" onclick="maqEnigma.configuracao(), maqEnigma.posicaoInicial()">Salvar configuração</button>
 				
 			</article>
 		</section>
@@ -176,9 +182,14 @@
 	</main>
 	<footer>
 		<p>IFSP 2019</p>
-		<p>Desenvolvido por: Augusto Guerra, Erika Raissa(fez ND) e Gabriel Gomes</p>
+		<p>Desenvolvido por: Augusto Guerra, Erika Raissa e Gabriel Gomes</p>
 	</footer>
 </body>
-<script type="text/javascript">//tab default primeiro
-document.getElementById('defaultOpen').click();</script>
+<script type="text/javascript">//default ao abrir
+for(let i = 0; i < 2; i++){
+	document.getElementById('defaultOpen').click();
+	document.getElementById('CI3').click();
+	document.getElementById('CII2').click();
+	document.getElementById('CIII1').click();}</script>
 </html>
+
