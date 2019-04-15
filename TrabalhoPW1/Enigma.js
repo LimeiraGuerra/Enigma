@@ -351,11 +351,52 @@ var maqEnigma = {
 				letra = letra.replace("ç", "c");
 				break;
 		}
-
 	}
-	criptografar(letra){//, rotor3,rotor2, rotor1,posicao1, posicao2,posicao3){
-		trocarChar(letra)
+
+	criptografar(letra, rotor3, rotor2, rotor1, posicao1, posicao2, posicao3){
 		var posicaoLetra_Rotor;
+
+
+
+		primo(num) {
+			let cont;
+			for (var i=1; i<=num; i++){
+				if num % i === 0{
+					cont+=1
+				}
+			}	
+	        if cont === 2{ 
+	        	return true;
+	         }
+	        else{
+	        	return false;
+	         }
+	     }
+
+	    mmm(X, Y){
+	    	let resto;
+	    	let mdc = X;
+	    	let mmc = 0;
+	    	let aux=Y;	
+	    	while(resto!=0){
+	    		resto = mdc % aux;
+	    		mdc=aux;
+	    		aux=resto; 
+	    	}
+
+	    	mmc =(X*Y)/mdc;
+	    	return(mmc);
+
+	    encontrarMMC(posicao1, posicao2, posicao3){
+	    	var numeros =[posicao1, posicao2, posicao3];
+	    	numeros.sort((a, b)=>a-b);
+	    	if (numeros[0]!=0){
+	    		var resultado = MMC(numeros[2], numeros[1]);
+	    		resultado = MMC(resultado, nuemro[0]);
+	    		return resultado
+	    	}
+	    }
+	    }
 
 		BuscarIndice_Letra(letra){
 			for x in range (0, (rotor1.length-1){
@@ -365,19 +406,62 @@ var maqEnigma = {
 			}
 				
 
-		/*mudarletra(){
-		*	posicaoLetra_Cript = posicao2 + posicaoLetra_Rotor - posicao1
-		*}
-		*excecoes(){
-		*	//if posicao1>0 && posicao2>0 && posicao3>0 && FALTA FAZER MMC DOS TRÊS NÚMEROS
-		*
-		*	else{
-		*		if posicao2  % 2 === 0{
-		*		if posicaoLetra_Rotor > 3 && (posicaoLetra_Rotor%2===0 && posicaoLetra_Rotor%3===0){
-		*				posicao1 = posicao1 + 2
-		*			}
-		*		}
-		*/
+		PegarPosicaoLetra(posicaoLetra_Rotor){
+			posicaoLetra_Cript = posicao2 + posicaoLetra_Rotor - posicao1
+		}
+
+
+		Verposicoes(posicao1,posicao2,posicao3){
+			if posicao1 > 26{
+				posicao1 =0;
+				posicao2+=1;
+			}
+			if posicao2 > 26{
+				posicao2=0
+				posicao3+=1;
+			}
+			if posicao3 > 26{
+				posicao3=0;
+				posicao1+=1;
+			}
+		}
+		excecoes(letra){
+
+			if posicao1>0 && posicao2>0 && posicao3>0 && (encontrarMMC(posicao1, posicao2, posicao3))>1000{
+				posicao1+=3
+			}
+			
+		
+			else{
+				if posicao2  % 2 === 0{
+					if posicaoLetra_Rotor > 3 && (posicaoLetra_Rotor%2===0 && posicaoLetra_Rotor%3===0){
+						posicao1 += 2
+					}
+					else if{
+						if primo(posicao1) {
+							posicao1 += 2
+						}
+					}
+					else{
+						posicao1 += 1
+					}
+				}
+
+
+				else{
+					if posicaoLetra_Rotor > 3 && (posicaoLetra_Rotor%2===0 && posicaoLetra_Rotor%3===0){
+						posicao1 += 1
+					}
+					else if {
+						if primo(posicao1) {
+							posicao1 += 1
+						}
+					}
+					else{
+						posicao1+=2
+					}
+				}
+		
 
 
 
