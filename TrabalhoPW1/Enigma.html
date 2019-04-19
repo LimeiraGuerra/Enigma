@@ -31,15 +31,15 @@
 				<div class="Rotores">
 					<div id="Rotor3">
 					<span id="lRotor3">Rotor 3</span>
-					<input id="CI3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf1" onclick="blockCheck3()">
+					<input id="CI3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf1" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
 					<label for="CI3" class="lR3">Configuração I</label>
-					<input id="CII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf2" onclick="blockCheck3()">
+					<input id="CII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf2" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
 					<label for="CII3" class="lR3">Configuração II</label>
-					<input id="CIII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf3" onclick="blockCheck3()">
+					<input id="CIII3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf3" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
 					<label for="CIII3" class="lR3">Configuração III</label>
-					<input id="CIV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf4" onclick="blockCheck3()">
+					<input id="CIV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf4" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
 					<label for="CIV3" class="lR3">Configuração IV</label>
-					<input id="CV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf5" onclick="blockCheck3()">
+					<input id="CV3" type="radio" name="nR3" aria-labeledby="lRotor3" value="conf5" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
 					<label for="CV3" class="lR3">Configuração V</label>
 					</div>
 					<div class="posN">
@@ -50,15 +50,15 @@
 				<div class="Rotores">
 					<div id="Rotor2">
 					<span id="lRotor2">Rotor 2</span>
-					<input id="CI2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf1" onclick="blockCheck2()">
+					<input id="CI2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf1" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
 					<label for="CI2" class="lR2">Configuração I</label>
-					<input id="CII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf2" onclick="blockCheck2()">
+					<input id="CII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf2" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
 					<label for="CII2" class="lR2">Configuração II</label>
-					<input id="CIII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf3" onclick="blockCheck2()">
+					<input id="CIII2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf3" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
 					<label for="CIII2" class="lR2">Configuração III</label>
-					<input id="CIV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf4" onclick="blockCheck2()">
+					<input id="CIV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf4" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
 					<label for="CIV2" class="lR2">Configuração IV</label>
-					<input id="CV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf5" onclick="blockCheck2()">
+					<input id="CV2" type="radio" name="nR2" aria-labeledby="lRotor2" value="conf5" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
 					<label for="CV2" class="lR2">Configuração V</label>
 					</div>
 					<div class="posN">
@@ -69,15 +69,15 @@
 				<div class="Rotores">
 					<div id="Rotor1">
 					<span id="lRotor1">Rotor 1</span>
-					<input id="CI1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf1" onclick="blockCheck1()">
+					<input id="CI1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf1" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
 					<label for="CI1" class="lR1">Configuração I</label>
-					<input id="CII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf2" onclick="blockCheck1()">
+					<input id="CII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf2" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
 					<label for="CII1" class="lR1">Configuração II</label>
-					<input id="CIII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf3" onclick="blockCheck1()">
+					<input id="CIII1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf3" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
 					<label for="CIII1" class="lR1">Configuração III</label>
-					<input id="CIV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf4" onclick="blockCheck1()">
+					<input id="CIV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf4" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
 					<label for="CIV1" class="lR1">Configuração IV</label>
-					<input id="CV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf5" onclick="blockCheck1()">
+					<input id="CV1" type="radio" name="nR1" aria-labeledby="lRotor1" value="conf5" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
 					<label for="CV1" class="lR1">Configuração V</label>
 					</div>
 					<div class="posN">
@@ -95,7 +95,7 @@
 			</article>
 		</section>
 		<section id="Virtual" class="tabcontent">
-			<article id="teclado">
+			<article id="teclado" onclick="tecladoVirtual()">
 				<div>
 					<button value="1">1</button>
 					<button value="2">2</button>
@@ -190,11 +190,9 @@
 	</footer>
 </body>
 <script type="text/javascript">//default ao abrir
-for(let i = 0; i < 2; i++){
-	document.getElementById('CI3').click();
-	document.getElementById('CII2').click();
-	document.getElementById('CIII1').click();
-}
+blockChecks(R2, R1, R3, 'lR2', 'lR3');
+blockChecks(R1, R2, R3, 'lR1', 'lR3');
+blockChecks(R2, R3, R1, 'lR2', 'lR1');
 document.getElementById('defaultOpen').click();
 document.getElementById('boxEntradaF').value = "";
 </script>

@@ -6,13 +6,14 @@ var maqEnigma = {
 	rotor2: null,
 	rotor3: null,
 
+	conf1: ["L", "G", "Q", "N", "M", "W", " ", "Y", "V", "T", "E", "B", "O", "D", "U", "H", "Z", "F", "K", "P", "C", "S", "A", "J", "R", "I", "X"],
+	conf2: [" ", "O", "V", "Z", "N", "D", "T", "K", "A", "Q", "L", "C", "J", "R", "W", "Y", "M", "P", "X", "I", "B", "G", "H", "F", "U", "E", "S"],
+	conf3: ["M", "C", "K", "E", "U", "V", "N", "I", "T", "H", "P", "Z", "X", "Y", "F", "O", "Q", " ", "S", "A", "G", "J", "L", "B", "D", "W", "R"],
+	conf4: ["E", "I", "W", "B", "P", "S", "T", "J", "C", "V", "O", "G", "K", "Z", "H", "F", "N", "L", " ", "M", "D", "R", "Y", "X", "Q", "A", "U"],
+	conf5: ["J", "V", "U", "E", "Y", "O", "G", "I", "D", " ", "Q", "Z", "K", "H", "T", "R", "P", "X", "A", "W", "S", "B", "N", "M", "C", "L", "F"],
+
 	//define a configuração dos rotores
-	configuracao(){
-		var conf1=["L", "G", "Q", "N", "M", "W", " ", "Y", "V", "T", "E", "B", "O", "D", "U", "H", "Z", "F", "K", "P", "C", "S", "A", "J", "R", "I", "X"];
-		var conf2=[" ", "O", "V", "Z", "N", "D", "T", "K", "A", "Q", "L", "C", "J", "R", "W", "Y", "M", "P", "X", "I", "B", "G", "H", "F", "U", "E", "S"];
-		var conf3=["M", "C", "K", "E", "U", "V", "N", "I", "T", "H", "P", "Z", "X", "Y", "F", "O", "Q", " ", "S", "A", "G", "J", "L", "B", "D", "W", "R"];
-		var conf4=["E", "I", "W", "B", "P", "S", "T", "J", "C", "V", "O", "G", "K", "Z", "H", "F", "N", "L", " ", "M", "D", "R", "Y", "X", "Q", "A", "U"];
-		var conf5=["J", "V", "U", "E", "Y", "O", "G", "I", "D", " ", "Q", "Z", "K", "H", "T", "R", "P", "X", "A", "W", "S", "B", "N", "M", "C", "L", "F"];
+	configuracao: function(){
 
 		var R1 = encontraCheck(document.getElementsByName('nR1'));
 		var R2 = encontraCheck(document.getElementsByName('nR2'));
@@ -20,55 +21,55 @@ var maqEnigma = {
 
 		switch(R1.value){
 			case "conf1":
-				this.rotor1 = conf1;
+				this.rotor1 = this.conf1;
 				break;
 			case "conf2":
-				this.rotor1 = conf2;
+				this.rotor1 = this.conf2;
 				break;
 			case "conf3":
-				this.rotor1 = conf3;
+				this.rotor1 = this.conf3;
 				break;
 			case "conf4":
-				this.rotor1 = conf4;
+				this.rotor1 = this.conf4;
 				break;
 			case "conf5":
-				this.rotor1 = conf5;
+				this.rotor1 = this.conf5;
 				break;
 		}
 
 		switch(R2.value){
 			case "conf1":
-				this.rotor2 = conf1;
+				this.rotor2 = this.conf1;
 				break;
 			case "conf2":
-				this.rotor2 = conf2;
+				this.rotor2 = this.conf2;
 				break;
 			case "conf3":
-				this.rotor2 = conf3;
+				this.rotor2 = this.conf3;
 				break;
 			case "conf4":
-				this.rotor2 = conf4;
+				this.rotor2 = this.conf4;
 				break;
 			case "conf5":
-				this.rotor2 = conf5;
+				this.rotor2 = this.conf5;
 				break;
 		}
 
 		switch(R3.value){
 			case "conf1":
-				this.rotor3 = conf1;
+				this.rotor3 = this.conf1;
 				break;
 			case "conf2":
-				this.rotor3 = conf2;
+				this.rotor3 = this.conf2;
 				break;
 			case "conf3":
-				this.rotor3 = conf3;
+				this.rotor3 = this.conf3;
 				break;
 			case "conf4":
-				this.rotor3 = conf4;
+				this.rotor3 = this.conf4;
 				break;
 			case "conf5":
-				this.rotor3 = conf5;
+				this.rotor3 = this.conf5;
 				break;
 		}
 	},
@@ -79,7 +80,7 @@ var maqEnigma = {
 	posicao3i: 0,
 
 	//define as posições iniciais
-	posicaoInicial(){
+	posicaoInicial: function(){
 		var p1 = document.getElementById("NR1");
 		var p2 = document.getElementById("NR2");
 		var p3 = document.getElementById("NR3");
@@ -99,7 +100,7 @@ var maqEnigma = {
 	plugboard: ['A', 'X', 'F', 'S', 'L', 'T', 'J', 'D', 'Q', 'N', 'P', 'I'],
 
 	//encontra os pares de plugs e substitui para a letra correspondente
-	setPlugs(letra){
+	setPlugs: function(letra){
 		for (let i = 0; i < this.plugboard.length; i++){
 			if (this.plugboard[i] == letra) {
 				if (i % 2 == 0) {
@@ -115,7 +116,7 @@ var maqEnigma = {
 	},
 
 	//Criptografa letra por letra
-	criptografar(letra){
+	criptografar: function(letra){
 		letra = trocarChar(letra);
 		if (verificaLetra(letra)) {
 			letra = this.setPlugs(letra);
@@ -129,6 +130,22 @@ var maqEnigma = {
 			this.posicao2a = posicoes[1];
 			this.posicao3a = posicoes[2];
 		}
+		return letra;	
+	},
+
+	//Descriptografa a letra por letra
+	descriptografar: function(letra){
+		letra = trocarChar(letra);
+		letra = this.setPlugs(letra);
+		var indice = BuscarIndice_Letra(letra, this.rotor3);
+		indice = Emparelhamento(indice, this.posicao3a, this.posicao2a, this.posicao1a);
+		letra = this.rotor1[indice];
+		letra = this.setPlugs(letra);
+		this.posicao1a = GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
+		var posicoes = overflow(this.posicao1a, this.posicao2a, this.posicao3a);
+		this.posicao1a = posicoes[0];
+		this.posicao2a = posicoes[1];
+		this.posicao3a = posicoes[2];
 		return letra;	
 	},
 
@@ -184,83 +201,32 @@ function encontraCheck(R){
 }
 
 //bloqueia os radios correspondentes
-function blockCheck3(){
-	mudanca();
-	var check = encontraCheck(document.getElementsByName('nR3'));	
-	var R2 = document.getElementsByName('nR2');
-	var R1 = document.getElementsByName('nR1');
-	for(let i = 0; i < R2.length; i++){
-		if(R2[i].value == check.value){
-			R2[i].disabled = true;
-			document.getElementsByClassName("lR2")[i].style.color = "gray";
-		}
-		else if(R2[i].value != (encontraCheck(R1).value)){
-			R2[i].disabled = false;
-			document.getElementsByClassName("lR2")[i].style.color = "black";
-		}
-	}
-	for(let i = 0; i < R1.length; i++){
-		if(R1[i].value == check.value){
-			R1[i].disabled = true;
-			document.getElementsByClassName("lR1")[i].style.color = "gray";
-		}
-		else if(R1[i].value != (encontraCheck(R2).value)){
-			R1[i].disabled = false;
-			document.getElementsByClassName("lR1")[i].style.color = "black";
-		}
-	}
-}
+var R1 = document.getElementsByName('nR1');
+var R2 = document.getElementsByName('nR2');
+var R3 = document.getElementsByName('nR3');
 
-function blockCheck2(){
+function blockChecks(r1, r2, r3, label, label2){
 	mudanca();
-	var check = encontraCheck(document.getElementsByName('nR2'));	
-	var R1 = document.getElementsByName('nR1');
-	var R3 = document.getElementsByName('nR3');
-	for(let i = 0; i < R1.length; i++){
-		if(R1[i].value == check.value){
-			R1[i].disabled = true;
-			document.getElementsByClassName("lR1")[i].style.color = "gray";
-		}
-		else if(R1[i].value != (encontraCheck(R3).value)){
-			R1[i].disabled = false;
-			document.getElementsByClassName("lR1")[i].style.color = "black";
-		}
-	}
-	for(let i = 0; i < R3.length; i++){
-		if(R3[i].value == check.value){
-			R3[i].disabled = true;
-			document.getElementsByClassName("lR3")[i].style.color = "gray";
-		}
-		else if(R3[i].value != (encontraCheck(R1).value)){
-			R3[i].disabled = false;
-			document.getElementsByClassName("lR3")[i].style.color = "black";
-		}
-	}
-}
 
-function blockCheck1(){
-	mudanca();
-	var check = encontraCheck(document.getElementsByName('nR1'));	
-	var R2 = document.getElementsByName('nR2');
-	var R3 = document.getElementsByName('nR3');
-	for(let i = 0; i < R2.length; i++){
-		if(R2[i].value == check.value){
-			R2[i].disabled = true;
-			document.getElementsByClassName("lR2")[i].style.color = "gray";
+	for(let i = 0; i < r3.length; i++){
+		if( (r2[i].checked || r1[i].checked) && !r3[i].checked){
+			r3[i].disabled = true;
+			document.getElementsByClassName(label2)[i].style.color = "gray";
 		}
-		else if(R2[i].value != (encontraCheck(R3).value)){
-			R2[i].disabled = false;
-			document.getElementsByClassName("lR2")[i].style.color = "black";
+		else{
+			r3[i].disabled = false;
+			document.getElementsByClassName(label2)[i].style.color = "black";
 		}
 	}
-	for(let i = 0; i < R3.length; i++){
-		if(R3[i].value == check.value){
-			R3[i].disabled = true;
-			document.getElementsByClassName("lR3")[i].style.color = "gray";
+
+	for(let i = 0; i < r1.length; i++){
+		if( (r2[i].checked || r3[i].checked) && !r1[i].checked){
+			r1[i].disabled = true;
+			document.getElementsByClassName(label)[i].style.color = "gray";
 		}
-		else if(R3[i].value != (encontraCheck(R2).value)){
-			R3[i].disabled = false;
-			document.getElementsByClassName("lR3")[i].style.color = "black";
+		else{
+			r1[i].disabled = false;
+			document.getElementsByClassName(label)[i].style.color = "black";
 		}
 	}
 }
@@ -429,7 +395,55 @@ function pegaTexto(){
 		var char = maqEnigma.criptografar(texto[i]);
 		document.getElementById("boxSaidaF").value += char;
 	}
+}
 
+//guarda todas as posicoes passadas
+var posPas = [];
+
+//retorna as posicoes anteriores dos rotores
+function retornaPos(){
+	posPas.splice(posPas.length-3, 3);
+	if (posPas.length === 0) {
+		maqEnigma.posicao1a = maqEnigma.posicao1i;
+		maqEnigma.posicao2a = maqEnigma.posicao2i;
+		maqEnigma.posicao3a = maqEnigma.posicao3i;
+	}
+	else{
+		maqEnigma.posicao1a = posPas[posPas.length-3];
+		maqEnigma.posicao2a = posPas[posPas.length-2];
+		maqEnigma.posicao3a = posPas[posPas.length-1];
+	}
+}
+
+//retira o valores das teclas
+function tecladoVirtual(){
+	var teclas = document.getElementById("teclado");
+	var alvo = event.target;
+
+	if (alvo.tagName === "BUTTON") {
+		let C = alvo.value;
+		switch(C){
+			case "\\n":
+				C = '\n';
+				document.getElementById("boxEntradaV").value += C;
+				document.getElementById("boxSaidaV").value += C;
+				break;
+
+			case "\\b":
+				retornaPos();
+				document.getElementById("boxEntradaV").value = document.getElementById("boxEntradaV").value.slice(0, -1);
+				document.getElementById("boxSaidaV").value = document.getElementById("boxSaidaV").value.slice(0, -1);
+				break;
+
+			default:
+				document.getElementById("boxEntradaV").value += C;
+				//if cripto/descripto
+				var char = maqEnigma.criptografar(C);
+				posPas.push(maqEnigma.posicao1a, maqEnigma.posicao2a, maqEnigma.posicao3a);
+				document.getElementById("boxSaidaV").value += char;
+				break;
+		}
+	}
 }
 
 //troca letras especiais por normais
@@ -569,6 +583,7 @@ function overflow(primeiro, segundo, terceiro){
 	return pos
 }
 
+//verifica se o char é letra ou nao
 function verificaLetra(letra){
 	var ascii = letra.charCodeAt(0);
 
