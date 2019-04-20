@@ -117,15 +117,15 @@ var maqEnigma = {
 
 	//Criptografa letra por letra
 	criptografar: function(letra){
-		letra = trocarChar(letra);
-		if (verificaLetra(letra)) {
+		letra = this. trocarChar(letra);
+		if (this.verificaLetra(letra)) {
 			letra = this.setPlugs(letra);
-			var indice = BuscarIndice_Letra(letra, this.rotor1);
-			indice = Emparelhamento(indice, this.posicao1a, this.posicao2a, this.posicao3a);
+			var indice = this.BuscarIndice_Letra(letra, this.rotor1);
+			indice = this.Emparelhamento(indice, this.posicao1a, this.posicao2a, this.posicao3a);
 			letra = this.rotor3[indice];
 			letra = this.setPlugs(letra);
-			this.posicao1a = GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
-			var posicoes = overflow(this.posicao1a, this.posicao2a, this.posicao3a);
+			this.posicao1a = this.GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
+			var posicoes = this.overflow(this.posicao1a, this.posicao2a, this.posicao3a);
 			this.posicao1a = posicoes[0];
 			this.posicao2a = posicoes[1];
 			this.posicao3a = posicoes[2];
@@ -135,19 +135,216 @@ var maqEnigma = {
 
 	//Descriptografa a letra por letra
 	descriptografar: function(letra){
-		letra = trocarChar(letra);
-		letra = this.setPlugs(letra);
-		var indice = BuscarIndice_Letra(letra, this.rotor3);
-		indice = Emparelhamento(indice, this.posicao3a, this.posicao2a, this.posicao1a);
-		letra = this.rotor1[indice];
-		letra = this.setPlugs(letra);
-		this.posicao1a = GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
-		var posicoes = overflow(this.posicao1a, this.posicao2a, this.posicao3a);
-		this.posicao1a = posicoes[0];
-		this.posicao2a = posicoes[1];
-		this.posicao3a = posicoes[2];
-		return letra;	
+		if(this.verificaLetra(letra)){
+			letra = this.setPlugs(letra);
+			var indice = this.BuscarIndice_Letra(letra, this.rotor3);
+			indice = this.Emparelhamento(indice, this.posicao3a, this.posicao2a, this.posicao1a);
+			letra = this.rotor1[indice];
+			letra = this.setPlugs(letra);
+			this.posicao1a = this.GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
+			var posicoes = this.overflow(this.posicao1a, this.posicao2a, this.posicao3a);
+			this.posicao1a = posicoes[0];
+			this.posicao2a = posicoes[1];
+			this.posicao3a = posicoes[2];
+		}	
+		return letra;
 	},
+	//encontra o mmc de 2 numeros
+	 MMC : function(X, Y){
+		let resto;
+		let mdc = X;
+		let mmc = 0;
+		let aux=Y;	
+		while(resto!=0){
+	 		resto = mdc % aux;
+	 		mdc=aux;
+	 		aux=resto; 
+	 	}
+
+		mmc =(X*Y)/mdc;
+			return mmc;
+	},
+
+	//encontra o mmc de 3 numeros
+	encontrarMMC : function(posicao1, posicao2, posicao3){
+	 	var numeros =[posicao1, posicao2, posicao3];
+	 	numeros.sort((a, b)=>a-b);
+	 	if (numeros[0]!=0){
+	  		var resultado = this.MMC(numeros[2], numeros[1]);
+	  		resultado = this.MMC(resultado, numeros[0]);
+	  		return resultado
+	 	}
+	},
+
+	//verifica se a pos do rotor 1 é primo
+	 primo : function(num) {
+		if (num === 0) {
+			return true
+		}
+		else {
+			let cont = 0;
+			for (var i=1; i<=num; i++){
+				if (num % i === 0){
+					cont+=1
+				}
+			}	
+	   		if (cont === 2){ 
+	    		return true
+	    	}
+	    	else{
+	    	   	return false
+	    	}
+		}
+	},
+	//verifica se o char é letra ou nao
+	verificaLetra:function (letra){
+		var ascii = letra.charCodeAt(0);
+
+		if (ascii === 32 || (ascii > 64 && ascii < 91)) {
+			return true
+		}
+		else{
+			return false
+		}
+	},
+	
+	//reinicia os rotores se as posicoes forem maiores que os indices
+	overflow : function (primeiro, segundo, terceiro){
+		var pos;
+		if (primeiro > 26){
+			primeiro -= 27;
+			segundo += 1;
+		}
+		if (segundo > 26){
+			segundo = 0;
+			terceiro += 1;
+		}
+		if (terceiro > 26){
+			terceiro = 0;
+			primeiro += 1;
+		}
+
+		pos = [primeiro, segundo, terceiro];
+		if (primeiro > 26 || segundo > 26) {
+			pos = this.overflow(primeiro, segundo, terceiro);
+		}
+		return pos
+	},
+
+	//troca letras especiais por normais
+	trocarChar:function (letra){
+		switch(letra) {
+			case "Á":
+				letra = letra.replace("Á", "A");
+				break;
+
+			case "Ã":
+				letra = letra.replace("Ã", "A");
+				break;
+
+			case "Â":
+				letra = letra.replace("Â", "A");
+				break;
+
+			case "À":
+				letra = letra.replace("À", "A");
+				break;
+
+			case "É":
+				letra = letra.replace("É", "E");
+				break;
+
+			case "Ê":
+				letra = letra.replace("Ê", "E");
+				break;
+
+			case "Í":
+				letra = letra.replace("Í", "I");
+				break;
+
+			case "Ó":
+				letra = letra.replace("Ó", "O");
+				break;
+
+			case "Õ":
+				letra = letra.replace("Õ", "O");
+				break;
+
+			case "Ô":
+				letra = letra.replace("Ô", "O");
+				break;
+
+			case "Ú":
+				letra = letra.replace("Ú", "U");
+				break;
+
+			case "Ç":
+				letra = letra.replace("Ç", "C");
+				break;
+		}
+		return letra
+	},
+
+	//Encontra a posição da letra rotor inicial
+	BuscarIndice_Letra : function (letra, rotor){
+		var posLetra_Rotor
+		for(let i = 0; i < rotor.length; i++){
+			if (letra === rotor[i]){
+				posLetra_Rotor = i;
+				break;
+			}
+		}
+		return posLetra_Rotor
+	},
+
+	//Encontra o emparelhamento de acordo com a posição da letra nos rotores
+	Emparelhamento:function (posLetra_Rotor, primeiro, segundo, terceiro){
+		posLetra_Rotor = segundo + posLetra_Rotor - primeiro;
+		
+		if (posLetra_Rotor < 0) {
+			posLetra_Rotor += 27;
+		}else if (posLetra_Rotor > 26) {
+			posLetra_Rotor -= 27;
+		}
+
+		posLetra_Rotor = terceiro + posLetra_Rotor - segundo;
+
+		if (posLetra_Rotor < 0) {
+			posLetra_Rotor += 27;
+		}else if (posLetra_Rotor > 26) {
+			posLetra_Rotor -= 27;
+		}
+
+		return posLetra_Rotor
+	},
+
+	//Gira o rotor de entrada de acordo com essas condicoes
+	GiraGira:function (primeiro, segundo, terceiro){
+		if (primeiro > 0 && segundo > 0 && terceiro > 0 && this.encontrarMMC(primeiro, segundo, terceiro) > 1000){
+			primeiro += 3;
+
+		}else if (segundo % 2 === 0){
+				if (primeiro > 3 && primeiro % 6 === 0){
+					primeiro += 2;
+				}else if (this.primo(primeiro)) {
+						primeiro += 2;
+					}else{
+						primeiro += 1;
+					}
+			}
+
+			else{
+				if (primeiro > 3 && primeiro % 6 === 0){
+					primeiro += 1;
+				}else if (this.primo(primeiro)) {
+						primeiro += 1;
+					}else{
+						primeiro += 2;
+					}
+			}
+			return primeiro
+	},
+
 
 }//Fim do Objeto
 
@@ -337,63 +534,24 @@ function mudanca(){
 	maqEnigma.rotor1 = null;
 }
 
-//encontra o mmc de 2 numeros
-function MMC(X, Y){
-	let resto;
-	let mdc = X;
-	let mmc = 0;
-	let aux=Y;	
-	while(resto!=0){
- 		resto = mdc % aux;
- 		mdc=aux;
- 		aux=resto; 
- 	}
 
-	mmc =(X*Y)/mdc;
-		return mmc;
-}
-
-//encontra o mmc de 3 numeros
-function encontrarMMC(posicao1, posicao2, posicao3){
- 	var numeros =[posicao1, posicao2, posicao3];
- 	numeros.sort((a, b)=>a-b);
- 	if (numeros[0]!=0){
-  		var resultado = MMC(numeros[2], numeros[1]);
-  		resultado = MMC(resultado, numeros[0]);
-  		return resultado
- 	}
-}
-
-//verifica se a pos do rotor 1 é primo
-function primo(num) {
-	if (num === 0) {
-		return true
-	}
-	else {
-		let cont = 0;
-		for (var i=1; i<=num; i++){
-			if (num % i === 0){
-				cont+=1
-			}
-		}	
-   		if (cont === 2){ 
-    		return true
-    	}
-    	else{
-    	   	return false
-    	}
-	}
-}
 
 //retira o texto da caixa e transforma em array de chars
 function pegaTexto(){
+	var desc =(document.getElementById("cxDesc")).checked;
 	document.getElementById("boxSaidaF").value = "";
 	var texto = document.getElementById("boxEntradaF").value.toUpperCase();
 	texto.split('');
 	for(let i = 0; i < texto.length; i++){
-		//falta um if pra cripto/descripto
-		var char = maqEnigma.criptografar(texto[i]);
-		document.getElementById("boxSaidaF").value += char;
+		if (desc === true){
+			var char = maqEnigma.descriptografar(texto[i]);
+			document.getElementById("boxSaidaF").value += char;
+		}
+		else{
+			var char = maqEnigma.criptografar(texto[i]);
+			document.getElementById("boxSaidaF").value += char;
+			
+		}
 	}
 }
 
@@ -401,7 +559,10 @@ function pegaTexto(){
 var posPas = [];
 
 //retorna as posicoes anteriores dos rotores
-function retornaPos(){
+function retornaPos(ultimo){
+	if (ultimo[ultimo.length-1] === '\n') {
+		return
+	}
 	posPas.splice(posPas.length-3, 3);
 	if (posPas.length === 0) {
 		maqEnigma.posicao1a = maqEnigma.posicao1i;
@@ -417,6 +578,7 @@ function retornaPos(){
 
 //retira o valores das teclas
 function tecladoVirtual(){
+	var desc =(document.getElementById("cxDesc")).checked;
 	var teclas = document.getElementById("teclado");
 	var alvo = event.target;
 
@@ -430,170 +592,36 @@ function tecladoVirtual(){
 				break;
 
 			case "\\b":
-				retornaPos();
+				retornaPos(document.getElementById("boxEntradaV").value);
 				document.getElementById("boxEntradaV").value = document.getElementById("boxEntradaV").value.slice(0, -1);
 				document.getElementById("boxSaidaV").value = document.getElementById("boxSaidaV").value.slice(0, -1);
 				break;
 
 			default:
 				document.getElementById("boxEntradaV").value += C;
-				//if cripto/descripto
-				var char = maqEnigma.criptografar(C);
-				posPas.push(maqEnigma.posicao1a, maqEnigma.posicao2a, maqEnigma.posicao3a);
-				document.getElementById("boxSaidaV").value += char;
-				break;
-		}
-	}
-}
 
-//troca letras especiais por normais
-function trocarChar(letra){
-	switch(letra) {
-		case "Á":
-			letra = letra.replace("Á", "A");
-			break;
 
-		case "Ã":
-			letra = letra.replace("Ã", "A");
-			break;
+				if (desc === true){
+					var char = maqEnigma.descriptografar(C);
+					posPas.push(maqEnigma.posicao1a, maqEnigma.posicao2a, maqEnigma.posicao3a);
+					document.getElementById("boxSaidaV").value += char;
+					break;
+					
+				}
+				else{
+					var char = maqEnigma.criptografar(C);
+					posPas.push(maqEnigma.posicao1a, maqEnigma.posicao2a, maqEnigma.posicao3a);
+					document.getElementById("boxSaidaV").value += char;
+					break;
 
-		case "Â":
-			letra = letra.replace("Â", "A");
-			break;
-
-		case "À":
-			letra = letra.replace("À", "A");
-			break;
-
-		case "É":
-			letra = letra.replace("É", "E");
-			break;
-
-		case "Ê":
-			letra = letra.replace("Ê", "E");
-			break;
-
-		case "Í":
-			letra = letra.replace("Í", "I");
-			break;
-
-		case "Ó":
-			letra = letra.replace("Ó", "O");
-			break;
-
-		case "Õ":
-			letra = letra.replace("Õ", "O");
-			break;
-
-		case "Ô":
-			letra = letra.replace("Ô", "O");
-			break;
-
-		case "Ú":
-			letra = letra.replace("Ú", "U");
-			break;
-
-		case "Ç":
-			letra = letra.replace("Ç", "C");
-			break;
-	}
-	return letra
-}
-
-//Encontra a posição da letra rotor inicial
-function BuscarIndice_Letra(letra, rotor){
-	var posLetra_Rotor
-	for(let i = 0; i < rotor.length; i++){
-		if (letra === rotor[i]){
-			posLetra_Rotor = i;
-			break;
-		}
-	}
-	return posLetra_Rotor
-}
-
-//Encontra o emparelhamento de acordo com a posição da letra nos rotores
-function Emparelhamento(posLetra_Rotor, primeiro, segundo, terceiro){
-	posLetra_Rotor = segundo + posLetra_Rotor - primeiro;
-	
-	if (posLetra_Rotor < 0) {
-		posLetra_Rotor += 27;
-	}else if (posLetra_Rotor > 26) {
-		posLetra_Rotor -= 27;
-	}
-
-	posLetra_Rotor = terceiro + posLetra_Rotor - segundo;
-
-	if (posLetra_Rotor < 0) {
-		posLetra_Rotor += 27;
-	}else if (posLetra_Rotor > 26) {
-		posLetra_Rotor -= 27;
-	}
-
-	return posLetra_Rotor
-}
-
-//Gira o rotor de entrada de acordo com essas condicoes
-function GiraGira(primeiro, segundo, terceiro){
-	if (primeiro > 0 && segundo > 0 && terceiro > 0 && encontrarMMC(primeiro, segundo, terceiro) > 1000){
-		primeiro += 3;
-
-	}else if (segundo % 2 === 0){
-			if (primeiro > 3 && primeiro % 6 === 0){
-				primeiro += 2;
-			}else if (primo(primeiro)) {
-					primeiro += 2;
-				}else{
-					primeiro += 1;
 				}
 		}
-
-		else{
-			if (primeiro > 3 && primeiro % 6 === 0){
-				primeiro += 1;
-			}else if (primo(primeiro)) {
-					primeiro += 1;
-				}else{
-					primeiro += 2;
-				}
-		}
-		return primeiro
-}
-
-//reinicia os rotores se as posicoes forem maiores que os indices
-function overflow(primeiro, segundo, terceiro){
-	var pos;
-	if (primeiro > 26){
-		primeiro -= 27;
-		segundo += 1;
-	}
-	if (segundo > 26){
-		segundo = 0;
-		terceiro += 1;
-	}
-	if (terceiro > 26){
-		terceiro = 0;
-		primeiro += 1;
-	}
-
-	pos = [primeiro, segundo, terceiro];
-	if (primeiro > 26 || segundo > 26) {
-		pos = overflow(primeiro, segundo, terceiro);
-	}
-	return pos
-}
-
-//verifica se o char é letra ou nao
-function verificaLetra(letra){
-	var ascii = letra.charCodeAt(0);
-
-	if (ascii === 32 || (ascii > 64 && ascii < 91)) {
-		return true
-	}
-	else{
-		return false
 	}
 }
+
+
+
+
 
 
 
