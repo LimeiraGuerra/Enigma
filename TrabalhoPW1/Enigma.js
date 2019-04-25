@@ -13,11 +13,11 @@ var maqEnigma = {
 	conf5: ["J", "V", "U", "E", "Y", "O", "G", "I", "D", " ", "Q", "Z", "K", "H", "T", "R", "P", "X", "A", "W", "S", "B", "N", "M", "C", "L", "F"],
 
 	//define a configuração dos rotores
-	configuracao: function(){
+	configuracao: function(R1, R2, R3){
 
-		var R1 = encontraCheck(document.getElementsByName('nR1'));
+		/*var R1 = encontraCheck(document.getElementsByName('nR1'));
 		var R2 = encontraCheck(document.getElementsByName('nR2'));
-		var R3 = encontraCheck(document.getElementsByName('nR3'));
+		var R3 = encontraCheck(document.getElementsByName('nR3'));*/
 
 		switch(R1.value){
 			case "conf1":
@@ -80,10 +80,10 @@ var maqEnigma = {
 	posicao3i: 0,
 
 	//define as posições iniciais
-	posicaoInicial: function(){
-		var p1 = document.getElementById("NR1");
+	posicaoInicial: function(p1, p2, p3){
+		/*var p1 = document.getElementById("NR1");
 		var p2 = document.getElementById("NR2");
-		var p3 = document.getElementById("NR3");
+		var p3 = document.getElementById("NR3");*/
 
 		this.posicao1i = Number(p1.value);
 		this.posicao2i = Number(p2.value);
@@ -99,8 +99,13 @@ var maqEnigma = {
 	//Ta escrito a mão porque ainda nao tem a funcao de criar plugboard
 	plugboard: ['A', 'X', 'F', 'S', 'L', 'T', 'J', 'D', 'Q', 'N', 'P', 'I'],
 
+	//informa os plugs
+	setPlug: function(letra1, letra2){
+		this.plugboard.push(letra1, letra2);
+	},
+
 	//encontra os pares de plugs e substitui para a letra correspondente
-	setPlugs: function(letra){
+	verificaPlugs: function(letra){
 		for (let i = 0; i < this.plugboard.length; i++){
 			if (this.plugboard[i] == letra) {
 				if (i % 2 == 0) {
@@ -119,11 +124,11 @@ var maqEnigma = {
 	criptografar: function(letra){
 		letra = this. trocarChar(letra);
 		if (this.verificaLetra(letra)) {
-			letra = this.setPlugs(letra);
+			letra = this.verificaPlugs(letra);
 			var indice = this.BuscarIndice_Letra(letra, this.rotor1);
 			indice = this.Emparelhamento(indice, this.posicao1a, this.posicao2a, this.posicao3a);
 			letra = this.rotor3[indice];
-			letra = this.setPlugs(letra);
+			letra = this.verificaPlugs(letra);
 			this.posicao1a = this.GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
 			var posicoes = this.overflow(this.posicao1a, this.posicao2a, this.posicao3a);
 			this.posicao1a = posicoes[0];
@@ -136,11 +141,11 @@ var maqEnigma = {
 	//Descriptografa a letra por letra
 	descriptografar: function(letra){
 		if(this.verificaLetra(letra)){
-			letra = this.setPlugs(letra);
+			letra = this.verificaPlugs(letra);
 			var indice = this.BuscarIndice_Letra(letra, this.rotor3);
 			indice = this.Emparelhamento(indice, this.posicao3a, this.posicao2a, this.posicao1a);
 			letra = this.rotor1[indice];
-			letra = this.setPlugs(letra);
+			letra = this.verificaPlugs(letra);
 			this.posicao1a = this.GiraGira(this.posicao1a, this.posicao2a, this.posicao3a);
 			var posicoes = this.overflow(this.posicao1a, this.posicao2a, this.posicao3a);
 			this.posicao1a = posicoes[0];
@@ -369,6 +374,44 @@ function abrePag(Nid, elemento) {
 	elemento.style.color = 'black';
 }//fim de Tabs
 
+//encontra os plugs escolhidos
+function encontraPlugs(){
+	maqEnigma.plugboard = [];
+	var letra1, letra2;
+	var plugs = document.getElementById('plugboard').childNodes;
+	for (let i = 0; i < plugs.length; i++){
+		letra1 = plugs[i].childNodes[0].value;
+		letra2 = plugs[i].childNodes[2].value;
+		maqEnigma.setPlug(letra1, letra2);
+	}
+}
+
+var perailist = [];
+
+//bloqueia as letras do plugboard
+function perai() {
+	mudanca();
+	perailist = [];
+    var selects = document.getElementsByTagName("select");
+
+    for (let i = 0; i < selects.length; i++){       
+        perailist.push(selects[i].value);
+    }
+
+    for (let i = 0; i < selects.length; i++){
+    	for(let j = 0; j < selects[i].length; j++){
+    		selects[i][j].disabled = false;
+    	}
+    	for(let j = 0; j < selects[i].length; j++){
+    		for (let o = 0; o < perailist.length; o++){
+    			if (selects[i][j].value === perailist[o]) {
+    				selects[i][j].disabled = true;
+    			}
+    		}
+    	}
+    }   
+}
+
 //bloqueia qualquer coisa que não seja numeros e também bloqueia acima de 26
 function blockNum(){
 	mudanca();
@@ -440,7 +483,8 @@ function criaPlugs(elemento) {
 			if(cont < 13){
 			div = document.createElement("DIV");
 			div.innerHTML = `<select>
-			<option value=" "> </option>
+			<option value="null"> </option>
+			<option value=" ">␣</option>
 			<option value="A">A</option>
 			<option value="B">B</option>
 			<option value="C">C</option>
@@ -468,7 +512,8 @@ function criaPlugs(elemento) {
 			<option value="Y">Y</option>
 			<option value="Z">Z</option>
 			</select>⇌<select>
-			<option value=" "> </option>
+			<option value="null"> </option>
+			<option value=" ">␣</option>
 			<option value="A">A</option>
 			<option value="B">B</option>
 			<option value="C">C</option>
@@ -514,8 +559,15 @@ function criaPlugs(elemento) {
 	}
 }
 
-//Reinicia tudo antes de começar
+//Reinicia e verifica tudo antes de começar
 function start(funcao, par1, par2){
+	for(let i = 0; i < perailist.length; i++){
+		if (perailist[i] === 'null') {
+			alert("!!Por favor, escolha um caractere para o plug!!");
+			return;	
+		}
+	}
+
 	if (maqEnigma.rotor1 == null) {
 		alert("!!Por favor, salve antes de prosseguir!!");
 	}
@@ -538,6 +590,7 @@ function mudanca(){
 
 //retira o texto da caixa e transforma em array de chars
 function pegaTexto(){
+	console.log(maqEnigma.plugboard)
 	var desc =(document.getElementById("cxDesc")).checked;
 	document.getElementById("boxSaidaF").value = "";
 	var texto = document.getElementById("boxEntradaF").value.toUpperCase();

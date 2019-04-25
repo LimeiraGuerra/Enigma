@@ -87,10 +87,10 @@
 				</div>
 				<div>
 					<h2>Plugboard</h2>
-					<button class="EsPlugs" value="-" onclick="criaPlugs(this)">-</button><button class="EsPlugs" value="+" onclick="criaPlugs(this)">+</button>
+					<button class="EsPlugs" value="-" onclick="criaPlugs(this), perai()">-</button><button class="EsPlugs" value="+" onclick="criaPlugs(this), perai()">+</button>
 				</div>
-				<div id="plugboard"></div>
-				<button id="Salvar" onclick="maqEnigma.configuracao(), maqEnigma.posicaoInicial(), start()">Salvar configuração</button>
+				<div id="plugboard" onchange="perai()"></div>
+				<button id="Salvar" onclick="maqEnigma.configuracao(encontraCheck(document.getElementsByName('nR1')), encontraCheck(document.getElementsByName('nR2')), encontraCheck(document.getElementsByName('nR3'))), maqEnigma.posicaoInicial(document.getElementById('NR1'), document.getElementById('NR2'), document.getElementById('NR3')), encontraPlugs(), start()">Salvar configuração</button>
 				
 			</article>
 		</section>
