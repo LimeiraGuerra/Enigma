@@ -586,11 +586,17 @@ function mudanca(){
 	maqEnigma.rotor1 = null;
 }
 
-
+//default ao abrir
+function Default(){
+	blockChecks(R2, R1, R3, 'lR2', 'lR3');
+	blockChecks(R1, R2, R3, 'lR1', 'lR3');
+	blockChecks(R2, R3, R1, 'lR2', 'lR1');
+	document.getElementById('defaultOpen').click();
+	document.getElementById('boxEntradaF').value = "";
+}
 
 //retira o texto da caixa e transforma em array de chars
 function pegaTexto(){
-	console.log(maqEnigma.plugboard)
 	var desc =(document.getElementById("cxDesc")).checked;
 	document.getElementById("boxSaidaF").value = "";
 	var texto = document.getElementById("boxEntradaF").value.toUpperCase();
@@ -606,6 +612,7 @@ function pegaTexto(){
 			
 		}
 	}
+	console.log(maqEnigma.posicao1a, maqEnigma.posicao2a, maqEnigma.posicao3a)
 }
 
 //guarda todas as posicoes passadas
