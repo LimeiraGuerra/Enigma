@@ -574,16 +574,20 @@ function start(funcao, par1, par2){
 	else if (funcao != undefined){
 		funcao(par1, par2);
 	}
+	else{
+		document.getElementById('Salvar').innerHTML = "Salvo!";
 		maqEnigma.posicao1a = maqEnigma.posicao1i;
 		maqEnigma.posicao2a = maqEnigma.posicao2i;
 		maqEnigma.posicao3a = maqEnigma.posicao3i;
 		document.getElementById("boxSaidaF").value = "";
 		document.getElementById("boxSaidaV").value = "";
 		document.getElementById("boxEntradaV").value = "";
+	}
 }
 
 function mudanca(){
 	maqEnigma.rotor1 = null;
+	document.getElementById('Salvar').innerHTML = "Salvar configuração";
 }
 
 //default ao abrir

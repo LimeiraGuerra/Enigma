@@ -148,7 +148,8 @@ footer {
 #Salvar, #magica{
 	margin-top: 10px;
 	border-radius: 5px;
-	padding: 8px;
+	width: 150px;
+	height: 40px;
 	border-color: black;
 }
 
