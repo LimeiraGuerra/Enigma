@@ -184,7 +184,7 @@ var maqEnigma = {
 	//verifica se a pos do rotor 1 é primo
 	 primo : function(num) {
 		if (num === 0) {
-			return true
+			return false
 		}
 		else {
 			let cont = 0;
