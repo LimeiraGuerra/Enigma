@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+    <meta name="author" content="Augusto Guerra; Erika Raissa; Gabriel Gomes"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="Enigma.css">
+    <script type="text/javascript" src="Enigma.js"></script>
+
+	<title>Máquina Enigma</title>
+</head>
+<body onload="Default()">
+	<header>
+		<img src="logo.png" width="120" alt="Logo Máquina Enigma" />
+		<h1>Máquina<br>Enigma</h1>
+
+		<nav>
+			<button id="defaultOpen" class="tab" onclick="abrePag('Config', this)"><b>Configuração</b></button><!--
+			--><button class="tab" onclick="start(abrePag, 'Virtual', this)"><b>Máquina 1</b></button><!--
+			--><button class="tab" onclick="start(abrePag, 'Fisico', this)"><b>Máquina 2</b></button>
+			<input id="cxDesc" type="checkbox" name="Descrip" />
+			<label for="cxDesc" style="color: white">Descriptografar</label>
+
+		</nav>
+	</header>
+	<main>
+		<section id="Config" class="tabcontent">
+			<article>
+				<div class="Rotores">
+					<div id="Rotor3">
+					<span id="lRotor3">Rotor 3</span>
+					<input id="CI3" type="radio" name="nR3" value="conf1" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
+					<label for="CI3" class="lR3">Configuração I</label>
+					<input id="CII3" type="radio" name="nR3" value="conf2" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
+					<label for="CII3" class="lR3">Configuração II</label>
+					<input id="CIII3" type="radio" name="nR3" value="conf3" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
+					<label for="CIII3" class="lR3">Configuração III</label>
+					<input id="CIV3" type="radio" name="nR3" value="conf4" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
+					<label for="CIV3" class="lR3">Configuração IV</label>
+					<input id="CV3" type="radio" name="nR3" value="conf5" onclick="blockChecks(R2, R3, R1, 'lR2', 'lR1')">
+					<label for="CV3" class="lR3">Configuração V</label>
+					</div>
+					<div class="posN">
+						<label for="NR3">Posição:</label>
+						<input type="number" id="NR3" name="nNR3" min="0" max="26" value="0" onkeydown="blockNum()" onchange="mudanca()" />
+					</div>
+				</div>
+				<div class="Rotores">
+					<div id="Rotor2">
+					<span id="lRotor2">Rotor 2</span>
+					<input id="CI2" type="radio" name="nR2" value="conf1" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
+					<label for="CI2" class="lR2">Configuração I</label>
+					<input id="CII2" type="radio" name="nR2" value="conf2" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
+					<label for="CII2" class="lR2">Configuração II</label>
+					<input id="CIII2" type="radio" name="nR2" value="conf3" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
+					<label for="CIII2" class="lR2">Configuração III</label>
+					<input id="CIV2" type="radio" name="nR2" value="conf4" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
+					<label for="CIV2" class="lR2">Configuração IV</label>
+					<input id="CV2" type="radio" name="nR2" value="conf5" onclick="blockChecks(R1, R2, R3, 'lR1', 'lR3')">
+					<label for="CV2" class="lR2">Configuração V</label>
+					</div>
+					<div class="posN">
+						<label for="NR2">Posição:</label>
+						<input type="number" id="NR2" name="nNR2" min="0" max="26" value="0" onkeydown="blockNum()" onchange="mudanca()" />
+					</div>
+				</div>
+				<div class="Rotores">
+					<div id="Rotor1">
+					<span id="lRotor1">Rotor 1</span>
+					<input id="CI1" type="radio" name="nR1" value="conf1" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
+					<label for="CI1" class="lR1">Configuração I</label>
+					<input id="CII1" type="radio" name="nR1" value="conf2" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
+					<label for="CII1" class="lR1">Configuração II</label>
+					<input id="CIII1" type="radio" name="nR1" value="conf3" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
+					<label for="CIII1" class="lR1">Configuração III</label>
+					<input id="CIV1" type="radio" name="nR1" value="conf4" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
+					<label for="CIV1" class="lR1">Configuração IV</label>
+					<input id="CV1" type="radio" name="nR1" value="conf5" onclick="blockChecks(R2, R1, R3, 'lR2', 'lR3')">
+					<label for="CV1" class="lR1">Configuração V</label>
+					</div>
+					<div class="posN">
+						<label for="NR1">Posição:</label>
+						<input type="number" id="NR1" name="nNR1" min="0" max="26" value="0" onkeydown="blockNum()" onchange="mudanca()" />
+					</div>
+				</div>
+				<div id="plugs">
+					<h2>Plugboard:</h2><!--
+					--><button class="EsPlugs" value="-" onclick="criaPlugs(this), perai()">-</button><button class="EsPlugs" value="+" onclick="criaPlugs(this), perai()">+</button>
+				</div>
+				<div id="plugboard" onchange="perai()"></div>
+				<button id="Salvar" onclick="maqEnigma.configuracao(encontraCheck(document.getElementsByName('nR1')), encontraCheck(document.getElementsByName('nR2')), encontraCheck(document.getElementsByName('nR3'))), maqEnigma.posicaoInicial(document.getElementById('NR1'), document.getElementById('NR2'), document.getElementById('NR3')), encontraPlugs(), start()">Salvar configuração</button>
+				
+			</article>
+		</section>
+		<section id="Virtual" class="tabcontent">
+			<article id="teclado" onclick="tecladoVirtual()">
+				<div>
+					<button value="1">1</button>
+					<button value="2">2</button>
+					<button value="3">3</button>
+					<button value="4">4</button>
+					<button value="5">5</button>
+					<button value="6">6</button>
+					<button value="7">7</button>
+					<button value="8">8</button>
+					<button value="9">9</button>
+					<button value="0">0</button>
+				</div>
+				<div>
+					<button value="Q">Q</button>
+					<button value="W">W</button>
+					<button value="E">E</button>
+					<button value="R">R</button>
+					<button value="T">T</button>
+					<button value="Y">Y</button>
+					<button value="U">U</button>
+					<button value="I">I</button>
+					<button value="O">O</button>
+					<button value="P">P</button>
+				</div>
+				<div>
+					<button value="A">A</button>
+					<button value="S">S</button>
+					<button value="D">D</button>
+					<button value="F">F</button>
+					<button value="G">G</button>
+					<button value="H">H</button>
+					<button value="J">J</button>
+					<button value="K">K</button>
+					<button value="L">L</button>
+				</div>
+				<div>
+					<button value="Z">Z</button>
+					<button value="X">X</button>
+					<button value="C">C</button>
+					<button value="V">V</button>
+					<button value="B">B</button>
+					<button value="N">N</button>
+					<button value="M">M</button>
+					<button value="\n">&crarr;</button>
+				</div>
+				<div>
+					<button value=",">,</button>
+					<button value=".">.</button>
+					<button value="?">?</button>
+					<button value="!">!</button>
+					<button value=":">:</button>
+					<button value=";">;</button>
+					<button value="\b">&larr;</button>
+				</div>
+				<div>
+					<button id="space" value=" "></button>
+				</div>				
+			</article>
+			<article id="io">
+				<div>
+					<label for="boxEntradaV">Entrada</label>
+					<textarea id="boxEntradaV" name="vEntrada" readonly></textarea>
+				</div>
+
+				<div>
+					<label for="boxSaidaV">Saida</label>
+					<textarea id="boxSaidaV" name="vSaida" readonly></textarea>
+				</div>
+			</article>
+		</section>
+		<section id="Fisico" class="tabcontent">
+			<article>
+				<div>
+					<label>Entrada</label>
+					<textarea id="boxEntradaF" name="fEntrada"></textarea>
+				</div>
+
+				<div>
+					<button id="magica" onclick="start(), pegaTexto()">Criptografar</button>
+				</div>
+
+				<div>
+					<label>Saida</label>
+					<textarea id="boxSaidaF" name="fSaida" readonly></textarea>
+				</div>
+			</article>
+		</section>
+	</main>
+	<footer>
+		<p>IFSP 2019</p>
+		<p>Desenvolvido por: Augusto Guerra, Erika Raissa e Gabriel Gomes</p>
+	</footer>
+</body>
+</html>
+
